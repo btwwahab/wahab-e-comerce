@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Expr\FuncCall;
 
 class HomeController extends Controller
@@ -17,15 +18,12 @@ class HomeController extends Controller
     }
 
     public function account() {
-        return view('frontend.accounts');
+        $user = Auth::user();
+        return view('frontend.accounts' , compact('user'));
     }
 
     public function compare() {
         return view('frontend.compare');
-    }
-
-    public function authentication() {
-        return view('frontend.auth.login-register');
     }
 
     public function wishlist() {

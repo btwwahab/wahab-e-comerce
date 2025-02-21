@@ -30,20 +30,26 @@
             </div>
             <ul class="nav__list">
                 <li class="nav__item">
-                    <a href="{{route('home')}}" class="nav__link active-link">Home</a>
+                    <a href="{{ route('home') }}" class="nav__link active-link">Home</a>
                 </li>
                 <li class="nav__item">
-                    <a href="{{route('shop')}}" class="nav__link">Shop</a>
+                    <a href="{{ route('shop') }}" class="nav__link">Shop</a>
                 </li>
                 <li class="nav__item">
-                    <a href="{{route('account')}}" class="nav__link">My Account</a>
+                    <a href="{{ route('compare') }}" class="nav__link">Compare</a>
                 </li>
-                <li class="nav__item">
-                    <a href="{{route('compare')}}" class="nav__link">Compare</a>
-                </li>
-                <li class="nav__item">
-                    <a href="{{route('login-signup')}}" class="nav__link">Login</a>
-                </li>
+                @if (Auth::check())
+                    <li class="nav__item">
+                        <a href="{{ route('account') }}" class="nav__link">My Account</a>
+                    </li>
+                @else
+                    <li class="nav__item">
+                        <a href="{{ route('login-signup') }}" class="nav__link">Login</a>
+                    </li>
+                @endif
+                {{-- <li class="nav__item">
+                    <a href="{{route('login-signup')}}" class="nav__link">Login/Signup</a>
+                </li> --}}
             </ul>
             <div class="header__search">
                 <input type="text" placeholder="Search For Items..." class="form__input" />
@@ -53,11 +59,11 @@
             </div>
         </div>
         <div class="header__user-actions">
-            <a href="{{route('wishlist')}}" class="header__action-btn" title="Wishlist">
+            <a href="{{ route('wishlist') }}" class="header__action-btn" title="Wishlist">
                 <img src="{{ asset('assets/img/icon-heart.svg') }}" alt="" />
                 <span class="count">3</span>
             </a>
-            <a href="{{route('cart')}}" class="header__action-btn" title="Cart">
+            <a href="{{ route('cart') }}" class="header__action-btn" title="Cart">
                 <img src="{{ asset('assets/img/icon-cart.svg') }}" alt="" />
                 <span class="count">3</span>
             </a>
@@ -67,6 +73,3 @@
         </div>
     </nav>
 </header>
-
-
-

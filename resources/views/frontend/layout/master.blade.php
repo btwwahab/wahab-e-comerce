@@ -21,6 +21,7 @@
 
 <body>
 
+    <!-- Loader -->
     <span class="loader"></span>
 
     <!-- Header Section -->
@@ -32,7 +33,13 @@
     <!-- Footer Section -->
     @include('frontend.partials.footer')
 
-
+    
+    <!-- jQuery -->
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <!-- Validate JS -->
+    <script src="{{ asset('assets/js/jquery-validate.js') }}"></script>
+    <!-- Form Validator JS -->
+    <script src="{{ asset('assets/js/form-validator.min.js') }}"></script>
     <!--=============== SWIPER JS ===============-->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <!--=============== MAIN JS ===============-->
