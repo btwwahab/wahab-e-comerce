@@ -1,6 +1,6 @@
 <!--=============== HEADER ===============-->
 <header class="header">
-    <div class="header__top">
+    {{-- <div class="header__top">
         <div class="header__container container">
             <div class="header__contact">
                 <span>(+01) - 2345 - 6789</span>
@@ -13,16 +13,16 @@
                 Log In / Sign Up
             </a>
         </div>
-    </div>
+    </div> --}}
 
     <nav class="nav container">
         <a href="index.html" class="nav__logo">
-            <img class="nav__logo-img" src="assets/img/logo.svg" alt="website logo" />
+            <img class="nav__logo-img" src="{{ asset('assets/img/logo.svg') }}" alt="website logo" />
         </a>
         <div class="nav__menu" id="nav-menu">
             <div class="nav__menu-top">
                 <a href="index.html" class="nav__menu-logo">
-                    <img src="assetsimg/logo.svg" alt="">
+                    <img src="{{ asset('assets/img/logo.svg') }}" alt="">
                 </a>
                 <div class="nav__close" id="nav-close">
                     <i class="fi fi-rs-cross-small"></i>
@@ -30,39 +30,39 @@
             </div>
             <ul class="nav__list">
                 <li class="nav__item">
-                    <a href="index.html" class="nav__link active-link">Home</a>
+                    <a href="{{route('home')}}" class="nav__link active-link">Home</a>
                 </li>
                 <li class="nav__item">
-                    <a href="shop.html" class="nav__link">Shop</a>
+                    <a href="{{route('shop')}}" class="nav__link">Shop</a>
                 </li>
                 <li class="nav__item">
-                    <a href="accounts.html" class="nav__link">My Account</a>
+                    <a href="{{route('account')}}" class="nav__link">My Account</a>
                 </li>
                 <li class="nav__item">
-                    <a href="compare.html" class="nav__link">Compare</a>
+                    <a href="{{route('compare')}}" class="nav__link">Compare</a>
                 </li>
                 <li class="nav__item">
-                    <a href="login-register.html" class="nav__link">Login</a>
+                    <a href="{{route('login-signup')}}" class="nav__link">Login</a>
                 </li>
             </ul>
             <div class="header__search">
                 <input type="text" placeholder="Search For Items..." class="form__input" />
                 <button class="search__btn">
-                    <img src="assets/img/search.png" alt="search icon" />
+                    <img src="{{ asset('assets/img/search.png') }}" alt="search icon" />
                 </button>
             </div>
         </div>
         <div class="header__user-actions">
-            <a href="wishlist.html" class="header__action-btn" title="Wishlist">
-                <img src="assets/img/icon-heart.svg" alt="" />
+            <a href="{{route('wishlist')}}" class="header__action-btn" title="Wishlist">
+                <img src="{{ asset('assets/img/icon-heart.svg') }}" alt="" />
                 <span class="count">3</span>
             </a>
-            <a href="cart.html" class="header__action-btn" title="Cart">
-                <img src="assets/img/icon-cart.svg" alt="" />
+            <a href="{{route('cart')}}" class="header__action-btn" title="Cart">
+                <img src="{{ asset('assets/img/icon-cart.svg') }}" alt="" />
                 <span class="count">3</span>
             </a>
             <div class="header__action-btn nav__toggle" id="nav-toggle">
-                <img src="assets/img/menu-burger.svg" alt="">
+                <img src="{{ asset('assets/img/menu-burger.svg') }}" alt="">
             </div>
         </div>
     </nav>

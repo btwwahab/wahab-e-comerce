@@ -174,7 +174,7 @@
                 <td><span class="cart__total-price">$250.00</span></td>
               </tr>
           </table>
-          <a href="checkout.html" class="btn flex btn--md">
+          <a href="{{route('checkout')}}" class="btn flex btn--md">
             <i class="fi fi-rs-box-alt"></i> Proceed To Checkout
           </a>
         </div>
