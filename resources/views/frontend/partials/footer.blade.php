@@ -3,7 +3,7 @@
   <div class="newsletter__container container grid">
     <h3 class="newsletter__title flex">
       <img
-        src="./assets/img/icon-email.svg"
+        src="{{asset('assets/img/icon-email.svg')}}"
         alt=""
         class="newsletter__icon"
       />
@@ -28,7 +28,7 @@
   <div class="footer__container grid">
     <div class="footer__content">
       <a href="index.html" class="footer__logo">
-        <img src="./assets/img/logo.svg" alt="" class="footer__logo-img" />
+        <img src="assets/img/logo.svg" alt="" class="footer__logo-img" />
       </a>
       <h4 class="footer__subtitle">Contact</h4>
       <p class="footer__description">
@@ -45,35 +45,35 @@
         <div class="footer__links flex">
           <a href="#">
             <img
-              src="./assets/img/icon-facebook.svg"
+              src="{{asset('assets/img/icon-facebook.svg')}}"
               alt=""
               class="footer__social-icon"
             />
           </a>
           <a href="#">
             <img
-              src="./assets/img/icon-twitter.svg"
+              src="{{asset('assets/img/icon-twitter.svg')}}"
               alt=""
               class="footer__social-icon"
             />
           </a>
           <a href="#">
             <img
-              src="./assets/img/icon-instagram.svg"
+              src="{{asset('assets/img/icon-instagram.svg')}}"
               alt=""
               class="footer__social-icon"
             />
           </a>
           <a href="#">
             <img
-              src="./assets/img/icon-pinterest.svg"
+              src="{{asset('assets/img/icon-pinterest.svg')}}"
               alt=""
               class="footer__social-icon"
             />
           </a>
           <a href="#">
             <img
-              src="./assets/img/icon-youtube.svg"
+              src="{{asset('assets/img/icon-youtube.svg')}}"
               alt=""
               class="footer__social-icon"
             />
@@ -106,7 +106,7 @@
     <div class="footer__content">
       <h3 class="footer__title">Secured Payed Gateways</h3>
       <img
-        src="./assets/img/payment-method.png"
+        src="{{asset('assets/img/payment-method.png')}}"
         alt=""
         class="payment__img"
       />
