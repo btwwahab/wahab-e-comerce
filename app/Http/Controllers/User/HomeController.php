@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Expr\FuncCall;
@@ -11,9 +13,11 @@ class HomeController extends Controller
 {
     public function home()  {
 
-        
+        $featuredCategories = Category::where('status' , 1)->get();
 
-        return view('frontend.home');
+        $featuredProducts = Product::where('status' , 1)->latest()->take(8)->get();
+
+        return view('frontend.home' , compact('featuredCategories' , 'featuredProducts'));
     }
 
     public function shop() {

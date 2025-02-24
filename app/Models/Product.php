@@ -11,7 +11,7 @@ class Product extends Model
 
     protected $fillable = [
          'name', 'slug', 'category_id', 'price', 'discount_price', 
-        'description', 'image', 'stock', 'sku', 'tags', 'status'
+        'description', 'image_front','image_back' , 'stock', 'sku', 'tags', 'status'
     ];
 
     protected static function boot()

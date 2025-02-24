@@ -16,21 +16,21 @@ class CategorySeeder extends Seeder
         Category::insert([
 
             [
-                'name' => 'Electronics',
-                'slug' => 'electronics',
-                'image' => 'electronics.jpg',
+                'name' => 'Clothing',
+                'slug' => 'clothing',
+                'image' => 'category-1.jpg',
                 'status' => 1,
             ],
             [
                 'name' => 'Fashion',
                 'slug' => 'fashion',
-                'image' => 'fashion.jpg',
+                'image' => 'category-2.jpg',
                 'status' => 1,
             ],
             [
-                'name' => 'Home & Kitchen',
-                'slug' => 'home-kitchen',
-                'image' => 'home-kitchen.jpg',
+                'name' => 'Foot Wear',
+                'slug' => 'footwear',
+                'image' => 'category-5.jpg',
                 'status' => 1,
             ]
 
