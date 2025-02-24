@@ -10,6 +10,9 @@ use PhpParser\Node\Expr\FuncCall;
 class HomeController extends Controller
 {
     public function home()  {
+
+        
+
         return view('frontend.home');
     }
 
@@ -39,7 +42,7 @@ class HomeController extends Controller
     }
 
     public function productDetail() {
-        return view('frontend.detail');
+        return view('frontend.details');
     }
 
 }

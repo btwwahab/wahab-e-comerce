@@ -1728,6 +1728,11 @@ table {
   animation: mltShdSpin 1.7s infinite ease, round 1.7s infinite ease;
 }
 
+.text-danger{
+  color: #dc3545;
+  font-size: .875em;
+}
+
 @keyframes mltShdSpin {
   0% {
     box-shadow: 0 -0.83em 0 -0.4em,

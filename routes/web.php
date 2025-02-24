@@ -19,7 +19,7 @@ Route::namespace('Auth')->group(function() {
 // Frontend pages routes on user site
 Route::namespace('User')->group(function () {
 
-Route::get('/' , [HomeController::class, 'home'])->name('home');
+    Route::get('/' , [HomeController::class, 'home'])->name('home');
 
     Route::get('shop' , [HomeController::class , 'shop'])->name('shop');
     Route::get('account' , [HomeController::class , 'account'])->name('account');

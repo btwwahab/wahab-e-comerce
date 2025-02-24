@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\LoginRequest;
+use App\Http\Requests\User\RegisterRequest;
 use App\Models\User;
 use Auth;
 use Hash;
@@ -14,13 +16,8 @@ class AuthController extends Controller
         return view('frontend.auth.login-register');
     }
 
-    public function userLogin(Request $request) 
+    public function userLogin(LoginRequest $request) 
     {
-        $request->validate([
-         'email' => 'required|email',
-         'password' => 'required|min:8'
-        ]);
-
         if (Auth::attempt($request->only('email', 'password'))) {
             return redirect()->route('home')->with('success' , 'Login Successfully');
         }
@@ -28,14 +25,8 @@ class AuthController extends Controller
         return back()->withErrors(['email' => 'Invalid Credentials.'])->withInput();
     }
 
-    public function userRegister(Request $request) 
+    public function userRegister(RegisterRequest $request) 
     {
-       $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:users',
-        'password' => 'required|min:8|confirmed'
-       ]);
-
        $user = User::create([
         'name' => $request->name,
         'email' => $request->email,
@@ -49,7 +40,6 @@ class AuthController extends Controller
 
     public function userLogout() 
     {
-
         Auth::logout();
         return redirect()->route('home')->with('success' , 'Logged out successfully.');
     }
