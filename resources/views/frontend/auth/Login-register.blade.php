@@ -67,9 +67,9 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <input type="password" id="register-password-confirm" name="password_confirmation"
+                            <input type="password" id="register-password-confirm" name="register_password_confirmation"
                                 placeholder="Confirm Password" class="form-control form__input" autocomplete="off" />
-                            @error('password_confirmation')
+                            @error('register_password_confirmation')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -103,7 +103,7 @@
                         },
                         password: {
                             required: "Please enter your password",
-                            minlength: "Password must be at least 6 characters long"
+                            minlength: "Password must be at least 8 characters long"
                         }
                     },
                     errorPlacement: function(error, element) {
@@ -133,7 +133,7 @@
                         required: true,
                         minlength: 8
                     },
-                    password_confirmation: {
+                    register_password_confirmation: {
                         required: true,
                         equalTo: "#register-password"
                     }
@@ -151,7 +151,7 @@
                         required: "Please enter your password",
                         minlength: "Password must be at least 6 characters long"
                     },
-                    password_confirmation: {
+                    register_password_confirmation: {
                         required: "Please confirm your password",
                         equalTo: "Passwords do not match"
                     }
