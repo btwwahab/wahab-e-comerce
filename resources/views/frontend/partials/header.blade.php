@@ -17,7 +17,7 @@
 
     <nav class="nav container">
         <a href="index.html" class="nav__logo">
-            <img class="nav__logo-img" src="{{ asset('assets/img/logo.svg') }}" alt="website logo" />
+            <img class="nav__logo-img" src="{{ asset('assets/img/logo-black.png') }}" alt="website logo" />
         </a>
         <div class="nav__menu" id="nav-menu">
             <div class="nav__menu-top">
@@ -30,42 +30,56 @@
             </div>
             <ul class="nav__list">
                 <li class="nav__item">
-                    <a href="{{ route('home') }}" class="nav__link active-link">Home</a>
+                    <a href="{{ route('home') }}" class="nav__link {{ request()->routeIs('home') ? 'active-link' : '' }}">Home</a>
                 </li>
                 <li class="nav__item">
-                    <a href="{{ route('shop') }}" class="nav__link">Shop</a>
+                    <a href="{{ route('shop') }}" class="nav__link {{ request()->routeIs('shop') ? 'active-link' : '' }}">Shop</a>
                 </li>
                 <li class="nav__item">
-                    <a href="{{ route('compare') }}" class="nav__link">Compare</a>
+                    <a href="{{ route('compare') }}" class="nav__link {{ request()->routeIs('compare') ? 'active-link' : '' }}">Compare</a>
                 </li>
                 @if (Auth::check())
                     <li class="nav__item">
-                        <a href="{{ route('account') }}" class="nav__link">My Account</a>
+                        <a href="{{ route('account') }}" class="nav__link {{ request()->routeIs('account') ? 'active-link' : '' }}">My Account</a>
                     </li>
                 @else
                     <li class="nav__item">
-                        <a href="{{ route('login-signup') }}" class="nav__link">Login</a>
+                        <a href="{{ route('login-signup') }}" class="nav__link {{ request()->routeIs('login-signup') ? 'active-link' : '' }}">Login</a>
                     </li>
                 @endif
-                {{-- <li class="nav__item">
-                    <a href="{{route('login-signup')}}" class="nav__link">Login/Signup</a>
-                </li> --}}
             </ul>
+            
             <div class="header__search">
-                <input type="text" placeholder="Search For Items..." class="form__input" />
-                <button class="search__btn">
-                    <img src="{{ asset('assets/img/search.png') }}" alt="search icon" />
-                </button>
+                <form method="GET" action="{{ route('shop') }}" class="header__search">
+                    <input type="text"
+                           name="q"
+                           value="{{ request()->get('q') }}"
+                           placeholder="Search For Items..."
+                           class="form__input" />
+                
+                    @if(request('category'))
+                        <input type="hidden" name="category" value="{{ request('category') }}">
+                    @endif
+                
+                    @if(request('sort'))
+                        <input type="hidden" name="sort" value="{{ request('sort') }}">
+                    @endif
+                
+                    <button type="submit" class="search__btn">
+                        <img src="{{ asset('assets/img/search.png') }}" alt="search icon" />
+                    </button>
+                </form>
+                
             </div>
         </div>
         <div class="header__user-actions">
-            <a href="{{ route('wishlist') }}" class="header__action-btn" title="Wishlist">
+            <a href="{{ route('wishlist.index') }}" class="header__action-btn" title="Wishlist">
                 <img src="{{ asset('assets/img/icon-heart.svg') }}" alt="" />
-                <span class="count">3</span>
+                <span class="count" id="wishlistCount">{{ $wishlistCount }}</span>
             </a>
-            <a href="{{ route('cart') }}" class="header__action-btn" title="Cart">
+            <a href="{{ route('cart.index') }}" class="header__action-btn" title="Cart">
                 <img src="{{ asset('assets/img/icon-cart.svg') }}" alt="" />
-                <span class="count">3</span>
+                <span class="count" id="cartCount">{{ $cartCount }}</span>
             </a>
             <div class="header__action-btn nav__toggle" id="nav-toggle">
                 <img src="{{ asset('assets/img/menu-burger.svg') }}" alt="">
