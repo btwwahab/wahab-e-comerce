@@ -113,8 +113,8 @@
     </div>
   </div>
   <div class="footer__bottom">
-    <p class="copyright">&copy; 2024 Evara. All right reserved</p>
-    <span class="designer">Designer by Crypticalcoder</span>
+    <p class="copyright">&copy; 2025 Wahab E-Commerce. All right reserved</p>
+    <span class="designer">Designed by Abdul-Wahab</span>
   </div>
 </footer>
 
