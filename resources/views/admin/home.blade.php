@@ -23,10 +23,9 @@
                 <div class="col-xxl-5">
                     <div class="row">
                         <div class="col-12">
-                            {{-- <div class="alert alert-primary text-truncate mb-3" role="alert">
-                                We regret to inform you that our server is currently experiencing technical
-                                difficulties.
-                            </div> --}}
+                            <div class="alert alert-primary text-truncate mb-3" role="alert">
+                                Monitor dashboard activities regularly to keep everything running smoothly.
+                              </div>                              
                         </div>
 
                         <!-- Total Orders -->
@@ -163,9 +162,9 @@
                                     Recent Orders
                                 </h4>
 
-                                <a href="#!" class="btn btn-sm btn-soft-primary">
+                                {{-- <a href="#!" class="btn btn-sm btn-soft-primary">
                                     <i class="bx bx-plus me-1"></i>Create Order
-                                </a>
+                                </a> --}}
                             </div>
                         </div>
                         <!-- end card body -->
