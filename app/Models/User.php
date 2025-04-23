@@ -26,6 +26,11 @@ class User extends Authenticatable
      */
     protected $hidden = ['password', 'remember_token'];
 
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
     /**
      * Get the attributes that should be cast.
      *
@@ -38,4 +43,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
 }

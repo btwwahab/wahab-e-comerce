@@ -17,7 +17,7 @@
 
     <nav class="nav container">
         <a href="index.html" class="nav__logo">
-            <img class="nav__logo-img" src="{{ asset('assets/img/logo-black.png') }}" alt="website logo" />
+            <img class="nav__logo-img" src="{{ asset('assets/img/logo-2.png') }}" alt="website logo" />
         </a>
         <div class="nav__menu" id="nav-menu">
             <div class="nav__menu-top">

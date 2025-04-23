@@ -17,7 +17,7 @@
                     </p>
                     <a href="{{ route('shop') }}" class="btn">Shop Now</a>
                 </div>
-                <img src="{{ asset('assets/img/home-img.png') }}"ZZ class="home__img" alt="hats" />
+                <img src="{{ asset('assets/img/main-2.png') }}"ZZ class="home__img" alt="hats" />
             </div>
         </section>
 
@@ -26,47 +26,22 @@
             <h3 class="section__title"><span>Popular</span> Categories</h3>
             <div class="categories__container swiper">
                 <div class="swiper-wrapper">
-                    @foreach ($featuredCategories as $categories)
-                    <a href="{{ route('shop' , $categories->slug ) }}" class="category__item swiper-slide">
-                      <img src="{{ asset('assets/img/' . $categories->image) }}"alt="" class="category__img" />
-                      <h3 class="category__title">{{$categories->name}}</h3>
-                    </a>
-                    @endforeach
-                    {{-- <a href="{{ route('shop') }}" class="category__item swiper-slide">
-                        <img src="{{ asset('assets/img/category-2.jpg') }}"alt="" class="category__img" />
-                        <h3 class="category__title">Bags</h3>
-                    </a>
-                    <a href="{{ route('shop') }}" class="category__item swiper-slide">
-                        <img src="{{ asset('assets/img/category-3.jpg') }}"alt="" class="category__img" />
-                        <h3 class="category__title">Sandal</h3>
-                    </a>
-                    <a href="{{ route('shop') }}" class="category__item swiper-slide">
-                        <img src="{{ asset('assets/img/category-4.jpg') }}"alt="" class="category__img" />
-                        <h3 class="category__title">Scarf Cap</h3>
-                    </a>
-                    <a href="{{ route('shop') }}" class="category__item swiper-slide">
-                        <img src="{{ asset('assets/img/category-5.jpg') }}"alt="" class="category__img" />
-                        <h3 class="category__title">Shoes</h3>
-                    </a>
-                    <a href="{{ route('shop') }}" class="category__item swiper-slide">
-                        <img src="{{ asset('assets/img/category-6.jpg') }}"alt="" class="category__img" />
-                        <h3 class="category__title">Pillowcase</h3>
-                    </a>
-                    <a href="{{ route('shop') }}" class="category__item swiper-slide">
-                        <img src="{{ asset('assets/img/category-7.jpg') }}"alt="" class="category__img" />
-                        <h3 class="category__title">Jumpsuit</h3>
-                    </a>
-                    <a href="{{ route('shop') }}" class="category__item swiper-slide">
-                        <img src="{{ asset('assets/img/category-8.jpg') }}"alt="" class="category__img" />
-                        <h3 class="category__title">Hats</h3>
-                    </a> --}}
+                    @forelse ($userCategories as $category)
+                        <a href="{{ route('shop-category', $category->slug) }}" class="category__item swiper-slide">
+                            <img src="{{ asset('storage/' . $category->image) }}"alt="" class="category__img" />
+                            <h3 class="category__title">{{ $category->name }}</h3>
+                        </a>
+                    @empty
+                        <div colspan="7" class="text-center text-muted">No categories found.</div>
+                    @endforelse
+
                 </div>
 
                 <div class="swiper-button-prev">
-                    <i class="fi fi-rs-angle-left"></i>
+
                 </div>
                 <div class="swiper-button-next">
-                    <i class="fi fi-rs-angle-right"></i>
+
                 </div>
             </div>
         </section>
@@ -82,1402 +57,295 @@
             <div class="tab__items">
                 <div class="tab__item active-tab" content id="featured">
                     <div class="products__container grid">
-                      @foreach ($featuredProducts as $products)
-                      <div class="product__item">
-                        <div class="product__banner">
-                            <a href="{{ route('detail') }}" class="product__images">
-                                <img src="{{ asset('assets/img/' . $products->image_front) }}" alt=""
-                                    class="product__img default" />
-                                <img src="{{ asset('assets/img/' . $products->image_back) }}" alt=""
-                                    class="product__img hover" />
-                            </a>
-                            <div class="product__actions">
-                                <a href="#" class="action__btn" aria-label="Quick View">
-                                    <i class="fi fi-rs-eye"></i>
-                                </a>
-                                <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                    <i class="fi fi-rs-heart"></i>
-                                </a>
-                                <a href="#" class="action__btn" aria-label="Compare">
-                                    <i class="fi fi-rs-shuffle"></i>
-                                </a>
-                            </div>
-                            <div class="product__badge light-pink">Hot</div>
-                        </div>
-                        <div class="product__content">
-                            <span class="product__category">{{$products->category->name}}</span>
-                            <a href="{{ route('detail') }}">
-                                <h3 class="product__title">{{$products->name}}</h3>
-                            </a>
-                            <div class="product__rating">
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                            </div>
-                            <div class="product__price flex">
-                                <span class="new__price">{{$products->discount_price}}</span>
-                                <span class="old__price">{{$products->price}}</span>
-                            </div>
-                            <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                <i class="fi fi-rs-shopping-bag-add"></i>
-                            </a>
-                        </div>
-                    </div>
-                      @endforeach
-                        
-                        {{-- <div class="product__item">
-                            <div class="product__banner">
-                                <a href="{{ route('detail') }}" class="product__images">
-                                    <img src="{{ asset('assets/img/product-2-1.jpg') }}" alt=""
-                                        class="product__img default" />
-                                    <img src="{{ asset('assets/img/product-2-2.jpg') }}" alt=""
-                                        class="product__img hover" />
-                                </a>
-                                <div class="product__actions">
-                                    <a href="#" class="action__btn" aria-label="Quick View">
-                                        <i class="fi fi-rs-eye"></i>
+                        @foreach ($userProducts as $product)
+                            <div class="product__item">
+                                <div class="product__banner">
+                                    <a href="{{ route('product-details', $product->slug) }}" class="product__images">
+                                        <img src="{{ asset('storage/' . $product->image_front) }}" alt=""
+                                            class="product__img default" />
+                                        <img src="{{ asset('storage/' . $product->image_back) }}" alt=""
+                                            class="product__img hover" />
                                     </a>
-                                    <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                        <i class="fi fi-rs-heart"></i>
+                                    <div class="product__actions">
+                                        <a href="{{ route('product-details', $product->slug) }}" class="action__btn"
+                                            aria-label="Quick View">
+                                            <i class="fi fi-rs-eye"></i>
+                                        </a>
+                                        <form action="{{ route('wishlist.add') }}" method="POST"
+                                            class="wishlistForm d-inline">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <button type="submit" class="action__btn" id="wishlistBtn"
+                                                aria-label="Wishlist">
+                                                <i class="fi fi-rs-heart"></i>
+                                            </button>
+                                        </form>
+
+                                        <form action="{{ route('addToCompare', $product->id) }}" method="POST"
+                                            style="display:inline;">
+                                            @csrf
+                                            <button type="submit" class="action__btn" aria-label="Compare">
+                                                <i class="fi fi-rs-shuffle"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                    {!! $product->discount_badge !!}
+                                </div>
+                                <div class="product__content">
+                                    <span class="product__category">{{ $product->category->name }}</span>
+                                    <a href="{{ route('product-details', $product->slug) }}">
+                                        <h3 class="product__title">{{ $product->name }}</h3>
                                     </a>
-                                    <a href="#" class="action__btn" aria-label="Compare">
-                                        <i class="fi fi-rs-shuffle"></i>
-                                    </a>
-                                </div>
-                                <div class="product__badge light-green">Hot</div>
-                            </div>
-                            <div class="product__content">
-                                <span class="product__category">Clothing</span>
-                                <a href="{{ route('detail') }}">
-                                    <h3 class="product__title">Colorful Pattern Shirts</h3>
-                                </a>
-                                <div class="product__rating">
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                </div>
-                                <div class="product__price flex">
-                                    <span class="new__price">$238.85</span>
-                                    <span class="old__price">$245.8</span>
-                                </div>
-                                <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
+                                    <div class="product__rating">
+                                        <i class="fi fi-rs-star"></i>
+                                        <i class="fi fi-rs-star"></i>
+                                        <i class="fi fi-rs-star"></i>
+                                        <i class="fi fi-rs-star"></i>
+                                        <i class="fi fi-rs-star"></i>
+                                    </div>
+                                    <div class="product__price flex">
+                                        <span class="new__price">{{ $product->discount_price }}</span>
+                                        <span class="old__price">{{ $product->price }}</span>
+                                    </div>
+                                    {{-- <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
                                     <i class="fi fi-rs-shopping-bag-add"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__banner">
-                                <a href="{{ route('detail') }}" class="product__images">
-                                    <img src="{{ asset('assets/img/product-3-1.jpg') }}" alt=""
-                                        class="product__img default" />
-                                    <img src="{{ asset('assets/img/product-3-2.jpg') }}" alt=""
-                                        class="product__img hover" />
-                                </a>
-                                <div class="product__actions">
-                                    <a href="#" class="action__btn" aria-label="Quick View">
-                                        <i class="fi fi-rs-eye"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                        <i class="fi fi-rs-heart"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Compare">
-                                        <i class="fi fi-rs-shuffle"></i>
-                                    </a>
-                                </div>
-                                <div class="product__badge light-orange">Hot</div>
-                            </div>
-                            <div class="product__content">
-                                <span class="product__category">Clothing</span>
-                                <a href="{{ route('detail') }}">
-                                    <h3 class="product__title">Colorful Pattern Shirts</h3>
-                                </a>
-                                <div class="product__rating">
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                </div>
-                                <div class="product__price flex">
-                                    <span class="new__price">$238.85</span>
-                                    <span class="old__price">$245.8</span>
-                                </div>
-                                <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                    <i class="fi fi-rs-shopping-bag-add"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__banner">
-                                <a href="{{ route('detail') }}" class="product__images">
-                                    <img src="{{ asset('assets/img/product-4-1.jpg') }}" alt=""
-                                        class="product__img default" />
-                                    <img src="{{ asset('assets/img/product-4-2.jpg') }}" alt=""
-                                        class="product__img hover" />
-                                </a>
-                                <div class="product__actions">
-                                    <a href="#" class="action__btn" aria-label="Quick View">
-                                        <i class="fi fi-rs-eye"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                        <i class="fi fi-rs-heart"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Compare">
-                                        <i class="fi fi-rs-shuffle"></i>
-                                    </a>
-                                </div>
-                                <div class="product__badge light-blue">Hot</div>
-                            </div>
-                            <div class="product__content">
-                                <span class="product__category">Clothing</span>
-                                <a href="{{ route('detail') }}">
-                                    <h3 class="product__title">Colorful Pattern Shirts</h3>
-                                </a>
-                                <div class="product__rating">
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                </div>
-                                <div class="product__price flex">
-                                    <span class="new__price">$238.85</span>
-                                    <span class="old__price">$245.8</span>
-                                </div>
-                                <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                    <i class="fi fi-rs-shopping-bag-add"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__banner">
-                                <a href="{{ route('detail') }}" class="product__images">
-                                    <img src="{{ asset('assets/img/product-5-1.jpg') }}" alt=""
-                                        class="product__img default" />
-                                    <img src="{{ asset('assets/img/product-5-2.jpg') }}" alt=""
-                                        class="product__img hover" />
-                                </a>
-                                <div class="product__actions">
-                                    <a href="#" class="action__btn" aria-label="Quick View">
-                                        <i class="fi fi-rs-eye"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                        <i class="fi fi-rs-heart"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Compare">
-                                        <i class="fi fi-rs-shuffle"></i>
-                                    </a>
-                                </div>
-                                <div class="product__badge light-blue">-30%</div>
-                            </div>
-                            <div class="product__content">
-                                <span class="product__category">Clothing</span>
-                                <a href="{{ route('detail') }}">
-                                    <h3 class="product__title">Colorful Pattern Shirts</h3>
-                                </a>
-                                <div class="product__rating">
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                </div>
-                                <div class="product__price flex">
-                                    <span class="new__price">$238.85</span>
-                                    <span class="old__price">$245.8</span>
-                                </div>
-                                <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                    <i class="fi fi-rs-shopping-bag-add"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__banner">
-                                <a href="{{ route('detail') }}" class="product__images">
-                                    <img src="{{ asset('assets/img/product-6-1.jpg') }}" alt=""
-                                        class="product__img default" />
-                                    <img src="{{ asset('assets/img/product-6-2.jpg') }}" alt=""
-                                        class="product__img hover" />
-                                </a>
-                                <div class="product__actions">
-                                    <a href="#" class="action__btn" aria-label="Quick View">
-                                        <i class="fi fi-rs-eye"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                        <i class="fi fi-rs-heart"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Compare">
-                                        <i class="fi fi-rs-shuffle"></i>
-                                    </a>
-                                </div>
-                                <div class="product__badge light-blue">-22%</div>
-                            </div>
-                            <div class="product__content">
-                                <span class="product__category">Clothing</span>
-                                <a href="{{ route('detail') }}">
-                                    <h3 class="product__title">Colorful Pattern Shirts</h3>
-                                </a>
-                                <div class="product__rating">
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                </div>
-                                <div class="product__price flex">
-                                    <span class="new__price">$238.85</span>
-                                    <span class="old__price">$245.8</span>
-                                </div>
-                                <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                    <i class="fi fi-rs-shopping-bag-add"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__banner">
-                                <a href="{{ route('detail') }}" class="product__images">
-                                    <img src="{{ asset('assets/img/product-7-1.jpg') }}" alt=""
-                                        class="product__img default" />
-                                    <img src="{{ asset('assets/img/product-7-2.jpg') }}" alt=""
-                                        class="product__img hover" />
-                                </a>
-                                <div class="product__actions">
-                                    <a href="#" class="action__btn" aria-label="Quick View">
-                                        <i class="fi fi-rs-eye"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                        <i class="fi fi-rs-heart"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Compare">
-                                        <i class="fi fi-rs-shuffle"></i>
-                                    </a>
-                                </div>
-                                <div class="product__badge light-green">-22%</div>
-                            </div>
-                            <div class="product__content">
-                                <span class="product__category">Clothing</span>
-                                <a href="{{ route('detail') }}">
-                                    <h3 class="product__title">Colorful Pattern Shirts</h3>
-                                </a>
-                                <div class="product__rating">
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                </div>
-                                <div class="product__price flex">
-                                    <span class="new__price">$238.85</span>
-                                    <span class="old__price">$245.8</span>
-                                </div>
-                                <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                    <i class="fi fi-rs-shopping-bag-add"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__banner">
-                                <a href="{{ route('detail') }}" class="product__images">
-                                    <img src="{{ asset('assets/img/product-8-1.jpg') }}" alt=""
-                                        class="product__img default" />
-                                    <img src="{{ asset('assets/img/product-8-2.jpg') }}" alt=""
-                                        class="product__img hover" />
-                                </a>
-                                <div class="product__actions">
-                                    <a href="#" class="action__btn" aria-label="Quick View">
-                                        <i class="fi fi-rs-eye"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                        <i class="fi fi-rs-heart"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Compare">
-                                        <i class="fi fi-rs-shuffle"></i>
-                                    </a>
+                                </a> --}}
                                 </div>
                             </div>
-                            <div class="product__content">
-                                <span class="product__category">Clothing</span>
-                                <a href="{{ route('detail') }}">
-                                    <h3 class="product__title">Colorful Pattern Shirts</h3>
-                                </a>
-                                <div class="product__rating">
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                </div>
-                                <div class="product__price flex">
-                                    <span class="new__price">$238.85</span>
-                                    <span class="old__price">$245.8</span>
-                                </div>
-                                <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                    <i class="fi fi-rs-shopping-bag-add"></i>
-                                </a>
-                            </div>
-                        </div> --}}
+                        @endforeach
                     </div>
                 </div>
                 <div class="tab__item" content id="popular">
                     <div class="products__container grid">
-                        <div class="product__item">
-                            <div class="product__banner">
-                                <a href="{{ route('detail') }}" class="product__images">
-                                    <img src="{{ asset('assets/img/product-9-1.jpg') }}" alt=""
-                                        class="product__img default" />
-                                    <img src="{{ asset('assets/img/product-9-2.jpg') }}" alt=""
-                                        class="product__img hover" />
-                                </a>
-                                <div class="product__actions">
-                                    <a href="#" class="action__btn" aria-label="Quick View">
-                                        <i class="fi fi-rs-eye"></i>
+                        @foreach ($trendy as $product)
+                            <div class="product__item">
+                                <div class="product__banner">
+                                    <a href="{{ route('detail', ['id' => $product->id]) }}" class="product__images">
+                                        <img src="{{ asset('storage/' . $product->image_front) }}" alt=""
+                                            class="product__img default" />
+                                        <img src="{{ asset('storage/' . $product->image_back) }}" alt=""
+                                            class="product__img hover" />
                                     </a>
-                                    <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                        <i class="fi fi-rs-heart"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Compare">
-                                        <i class="fi fi-rs-shuffle"></i>
-                                    </a>
+                                    <div class="product__actions">
+                                        <a href="{{ route('product-details', $product->slug) }}" class="action__btn"
+                                            aria-label="Quick View">
+                                            <i class="fi fi-rs-eye"></i>
+                                        </a>
+                                        <form action="{{ route('wishlist.add') }}" method="POST"
+                                            class="wishlistForm d-inline">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <button type="submit" class="action__btn" id="wishlistBtn"
+                                                aria-label="Wishlist">
+                                                <i class="fi fi-rs-heart"></i>
+                                            </button>
+                                        </form>
+
+                                        <form action="{{ route('addToCompare', $product->id) }}" method="POST"
+                                            style="display:inline;">
+                                            @csrf
+                                            <button type="submit" class="action__btn" aria-label="Compare">
+                                                <i class="fi fi-rs-shuffle"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                    {!! $product->discount_badge !!}
                                 </div>
-                                <div class="product__badge light-pink">Hot</div>
-                            </div>
-                            <div class="product__content">
-                                <span class="product__category">Clothing</span>
-                                <a href="{{ route('detail') }}">
-                                    <h3 class="product__title">Colorful Pattern Shirts</h3>
-                                </a>
-                                <div class="product__rating">
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                </div>
-                                <div class="product__price flex">
-                                    <span class="new__price">$238.85</span>
-                                    <span class="old__price">$245.8</span>
-                                </div>
-                                <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                    <i class="fi fi-rs-shopping-bag-add"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__banner">
-                                <a href="{{ route('detail') }}" class="product__images">
-                                    <img src="{{ asset('assets/img/product-2-1.jpg') }}" alt=""
-                                        class="product__img default" />
-                                    <img src="{{ asset('assets/img/product-2-2.jpg') }}" alt=""
-                                        class="product__img hover" />
-                                </a>
-                                <div class="product__actions">
-                                    <a href="#" class="action__btn" aria-label="Quick View">
-                                        <i class="fi fi-rs-eye"></i>
+                                <div class="product__content">
+                                    <span
+                                        class="product__category">{{ $product->category->name ?? 'Uncategorized' }}</span>
+                                    <a href="{{ route('detail', ['id' => $product->id]) }}">
+                                        <h3 class="product__title">{{ $product->name }}</h3>
                                     </a>
-                                    <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                        <i class="fi fi-rs-heart"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Compare">
-                                        <i class="fi fi-rs-shuffle"></i>
-                                    </a>
-                                </div>
-                                <div class="product__badge light-green">Hot</div>
-                            </div>
-                            <div class="product__content">
-                                <span class="product__category">Clothing</span>
-                                <a href="{{ route('detail') }}">
-                                    <h3 class="product__title">Colorful Pattern Shirts</h3>
-                                </a>
-                                <div class="product__rating">
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                </div>
-                                <div class="product__price flex">
-                                    <span class="new__price">$238.85</span>
-                                    <span class="old__price">$245.8</span>
-                                </div>
-                                <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                    <i class="fi fi-rs-shopping-bag-add"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__banner">
-                                <a href="{{ route('detail') }}" class="product__images">
-                                    <img src="{{ asset('assets/img/product-10-1.jpg  ') }}  " alt=""
-                                        class="product__img default" />
-                                    <img src="{{ asset('assets/img/product-10-2.jpg  ') }} " alt=""
-                                        class="product__img hover" />
-                                </a>
-                                <div class="product__actions">
-                                    <a href="#" class="action__btn" aria-label="Quick View">
-                                        <i class="fi fi-rs-eye"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                        <i class="fi fi-rs-heart"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Compare">
-                                        <i class="fi fi-rs-shuffle"></i>
-                                    </a>
-                                </div>
-                                <div class="product__badge light-orange">Hot</div>
-                            </div>
-                            <div class="product__content">
-                                <span class="product__category">Clothing</span>
-                                <a href="{{ route('detail') }}">
-                                    <h3 class="product__title">Colorful Pattern Shirts</h3>
-                                </a>
-                                <div class="product__rating">
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                </div>
-                                <div class="product__price flex">
-                                    <span class="new__price">$238.85</span>
-                                    <span class="old__price">$245.8</span>
-                                </div>
-                                <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                    <i class="fi fi-rs-shopping-bag-add"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__banner">
-                                <a href="{{ route('detail') }}" class="product__images">
-                                    <img src="{{ asset('assets/img/product-4-1.jpg') }}" alt=""
-                                        class="product__img default" />
-                                    <img src="{{ asset('assets/img/product-4-2.jpg') }}" alt=""
-                                        class="product__img hover" />
-                                </a>
-                                <div class="product__actions">
-                                    <a href="#" class="action__btn" aria-label="Quick View">
-                                        <i class="fi fi-rs-eye"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                        <i class="fi fi-rs-heart"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Compare">
-                                        <i class="fi fi-rs-shuffle"></i>
-                                    </a>
-                                </div>
-                                <div class="product__badge light-blue">Hot</div>
-                            </div>
-                            <div class="product__content">
-                                <span class="product__category">Clothing</span>
-                                <a href="{{ route('detail') }}">
-                                    <h3 class="product__title">Colorful Pattern Shirts</h3>
-                                </a>
-                                <div class="product__rating">
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                </div>
-                                <div class="product__price flex">
-                                    <span class="new__price">$238.85</span>
-                                    <span class="old__price">$245.8</span>
-                                </div>
-                                <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                    <i class="fi fi-rs-shopping-bag-add"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__banner">
-                                <a href="{{ route('detail') }}" class="product__images">
-                                    <img src="{{ asset('assets/img/product-5-1.jpg') }}" alt=""
-                                        class="product__img default" />
-                                    <img src="{{ asset('assets/img/product-5-2.jpg') }}" alt=""
-                                        class="product__img hover" />
-                                </a>
-                                <div class="product__actions">
-                                    <a href="#" class="action__btn" aria-label="Quick View">
-                                        <i class="fi fi-rs-eye"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                        <i class="fi fi-rs-heart"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Compare">
-                                        <i class="fi fi-rs-shuffle"></i>
-                                    </a>
-                                </div>
-                                <div class="product__badge light-blue">-30%</div>
-                            </div>
-                            <div class="product__content">
-                                <span class="product__category">Clothing</span>
-                                <a href="{{ route('detail') }}">
-                                    <h3 class="product__title">Colorful Pattern Shirts</h3>
-                                </a>
-                                <div class="product__rating">
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                </div>
-                                <div class="product__price flex">
-                                    <span class="new__price">$238.85</span>
-                                    <span class="old__price">$245.8</span>
-                                </div>
-                                <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                    <i class="fi fi-rs-shopping-bag-add"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__banner">
-                                <a href="{{ route('detail') }}" class="product__images">
-                                    <img src="{{ asset('assets/img/product-11-1.jpg') }}" alt=""
-                                        class="product__img default" />
-                                    <img src="{{ asset('assets/img/product-11-2.jpg') }} " alt=""
-                                        class="product__img hover" />
-                                </a>
-                                <div class="product__actions">
-                                    <a href="#" class="action__btn" aria-label="Quick View">
-                                        <i class="fi fi-rs-eye"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                        <i class="fi fi-rs-heart"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Compare">
-                                        <i class="fi fi-rs-shuffle"></i>
-                                    </a>
-                                </div>
-                                <div class="product__badge light-blue">-22%</div>
-                            </div>
-                            <div class="product__content">
-                                <span class="product__category">Clothing</span>
-                                <a href="{{ route('detail') }}">
-                                    <h3 class="product__title">Colorful Pattern Shirts</h3>
-                                </a>
-                                <div class="product__rating">
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                </div>
-                                <div class="product__price flex">
-                                    <span class="new__price">$238.85</span>
-                                    <span class="old__price">$245.8</span>
-                                </div>
-                                <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                    <i class="fi fi-rs-shopping-bag-add"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__banner">
-                                <a href="{{ route('detail') }}" class="product__images">
-                                    <img src="{{ asset('assets/img/product-7-1.jpg') }}" alt=""
-                                        class="product__img default" />
-                                    <img src="{{ asset('assets/img/product-7-2.jpg') }}" alt=""
-                                        class="product__img hover" />
-                                </a>
-                                <div class="product__actions">
-                                    <a href="#" class="action__btn" aria-label="Quick View">
-                                        <i class="fi fi-rs-eye"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                        <i class="fi fi-rs-heart"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Compare">
-                                        <i class="fi fi-rs-shuffle"></i>
-                                    </a>
-                                </div>
-                                <div class="product__badge light-green">-22%</div>
-                            </div>
-                            <div class="product__content">
-                                <span class="product__category">Clothing</span>
-                                <a href="{{ route('detail') }}">
-                                    <h3 class="product__title">Colorful Pattern Shirts</h3>
-                                </a>
-                                <div class="product__rating">
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                </div>
-                                <div class="product__price flex">
-                                    <span class="new__price">$238.85</span>
-                                    <span class="old__price">$245.8</span>
-                                </div>
-                                <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                    <i class="fi fi-rs-shopping-bag-add"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__banner">
-                                <a href="{{ route('detail') }}" class="product__images">
-                                    <img src="{{ asset('assets/img/product-8-1.jpg') }}" alt=""
-                                        class="product__img default" />
-                                    <img src="{{ asset('assets/img/product-8-2.jpg') }}" alt=""
-                                        class="product__img hover" />
-                                </a>
-                                <div class="product__actions">
-                                    <a href="#" class="action__btn" aria-label="Quick View">
-                                        <i class="fi fi-rs-eye"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                        <i class="fi fi-rs-heart"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Compare">
-                                        <i class="fi fi-rs-shuffle"></i>
-                                    </a>
+                                    <div class="product__rating">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            <i class="fi fi-rs-star {{ $i <= $product->rating ? '' : 'inactive' }}"></i>
+                                        @endfor
+                                    </div>
+                                    <div class="product__price flex">
+                                        <span
+                                            class="new__price">${{ number_format($product->discount_price ?? $product->price, 2) }}</span>
+                                        @if ($product->discount_price)
+                                            <span class="old__price">${{ number_format($product->price, 2) }}</span>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
-                            <div class="product__content">
-                                <span class="product__category">Clothing</span>
-                                <a href="{{ route('detail') }}">
-                                    <h3 class="product__title">Colorful Pattern Shirts</h3>
-                                </a>
-                                <div class="product__rating">
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                </div>
-                                <div class="product__price flex">
-                                    <span class="new__price">$238.85</span>
-                                    <span class="old__price">$245.8</span>
-                                </div>
-                                <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                    <i class="fi fi-rs-shopping-bag-add"></i>
-                                </a>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="tab__item" content id="new-added">
                     <div class="products__container grid">
-                        <div class="product__item">
-                            <div class="product__banner">
-                                <a href="{{ route('detail') }}" class="product__images">
-                                    <img src="{{ asset('assets/img/product-1-1.jpg') }}" alt=""
-                                        class="product__img default" />
-                                    <img src="{{ asset('assets/img/product-1-2.jpg') }}" alt=""
-                                        class="product__img hover" />
-                                </a>
-                                <div class="product__actions">
-                                    <a href="#" class="action__btn" aria-label="Quick View">
-                                        <i class="fi fi-rs-eye"></i>
+                        @foreach ($newArrivals as $product)
+                            <div class="product__item">
+                                <div class="product__banner">
+                                    <a href="{{ route('detail', ['id' => $product->id]) }}" class="product__images">
+                                        <img src="{{ asset('storage/' . $product->image_front) }}" alt=""
+                                            class="product__img default" />
+                                        <img src="{{ asset('storage/' . $product->image_back) }}" alt=""
+                                            class="product__img hover" />
                                     </a>
-                                    <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                        <i class="fi fi-rs-heart"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Compare">
-                                        <i class="fi fi-rs-shuffle"></i>
-                                    </a>
+                                    <div class="product__actions">
+                                        <a href="{{ route('product-details', $product->slug) }}" class="action__btn"
+                                            aria-label="Quick View">
+                                            <i class="fi fi-rs-eye"></i>
+                                        </a>
+                                        <form action="{{ route('wishlist.add') }}" method="POST"
+                                            class="wishlistForm d-inline">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <button type="submit" class="action__btn" id="wishlistBtn"
+                                                aria-label="Wishlist">
+                                                <i class="fi fi-rs-heart"></i>
+                                            </button>
+                                        </form>
+
+                                        <form action="{{ route('addToCompare', $product->id) }}" method="POST"
+                                            style="display:inline;">
+                                            @csrf
+                                            <button type="submit" class="action__btn" aria-label="Compare">
+                                                <i class="fi fi-rs-shuffle"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                    {!! $product->discount_badge !!}
                                 </div>
-                                <div class="product__badge light-pink">Hot</div>
-                            </div>
-                            <div class="product__content">
-                                <span class="product__category">Clothing</span>
-                                <a href="{{ route('detail') }}">
-                                    <h3 class="product__title">Colorful Pattern Shirts</h3>
-                                </a>
-                                <div class="product__rating">
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                </div>
-                                <div class="product__price flex">
-                                    <span class="new__price">$238.85</span>
-                                    <span class="old__price">$245.8</span>
-                                </div>
-                                <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                    <i class="fi fi-rs-shopping-bag-add"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__banner">
-                                <a href="{{ route('detail') }}" class="product__images">
-                                    <img src="{{ asset('assets/img/product-12-1.jpg  ') }}   " alt=""
-                                        class="product__img default" />
-                                    <img src="{{ asset('assets/img/product-12-2.jpg  ') }}  " alt=""
-                                        class="product__img hover" />
-                                </a>
-                                <div class="product__actions">
-                                    <a href="#" class="action__btn" aria-label="Quick View">
-                                        <i class="fi fi-rs-eye"></i>
+                                <div class="product__content">
+                                    <span
+                                        class="product__category">{{ $product->category->name ?? 'Uncategorized' }}</span>
+                                    <a href="{{ route('detail', ['id' => $product->id]) }}">
+                                        <h3 class="product__title">{{ $product->name }}</h3>
                                     </a>
-                                    <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                        <i class="fi fi-rs-heart"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Compare">
-                                        <i class="fi fi-rs-shuffle"></i>
-                                    </a>
-                                </div>
-                                <div class="product__badge light-green">Hot</div>
-                            </div>
-                            <div class="product__content">
-                                <span class="product__category">Clothing</span>
-                                <a href="{{ route('detail') }}">
-                                    <h3 class="product__title">Colorful Pattern Shirts</h3>
-                                </a>
-                                <div class="product__rating">
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                </div>
-                                <div class="product__price flex">
-                                    <span class="new__price">$238.85</span>
-                                    <span class="old__price">$245.8</span>
-                                </div>
-                                <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                    <i class="fi fi-rs-shopping-bag-add"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__banner">
-                                <a href="{{ route('detail') }}" class="product__images">
-                                    <img src="{{ asset('assets/img/product-13-1.jpg') }}" alt=""
-                                        class="product__img default" />
-                                    <img src="{{ asset('assets/img/product-13-2.jpg') }}" alt=""
-                                        class="product__img hover" />
-                                </a>
-                                <div class="product__actions">
-                                    <a href="#" class="action__btn" aria-label="Quick View">
-                                        <i class="fi fi-rs-eye"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                        <i class="fi fi-rs-heart"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Compare">
-                                        <i class="fi fi-rs-shuffle"></i>
-                                    </a>
-                                </div>
-                                <div class="product__badge light-orange">Hot</div>
-                            </div>
-                            <div class="product__content">
-                                <span class="product__category">Clothing</span>
-                                <a href="{{ route('detail') }}">
-                                    <h3 class="product__title">Colorful Pattern Shirts</h3>
-                                </a>
-                                <div class="product__rating">
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                </div>
-                                <div class="product__price flex">
-                                    <span class="new__price">$238.85</span>
-                                    <span class="old__price">$245.8</span>
-                                </div>
-                                <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                    <i class="fi fi-rs-shopping-bag-add"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__banner">
-                                <a href="{{ route('detail') }}" class="product__images">
-                                    <img src="{{ asset('assets/img/product-4-1.jpg') }}" alt=""
-                                        class="product__img default" />
-                                    <img src="{{ asset('assets/img/product-4-2.jpg') }}" alt=""
-                                        class="product__img hover" />
-                                </a>
-                                <div class="product__actions">
-                                    <a href="#" class="action__btn" aria-label="Quick View">
-                                        <i class="fi fi-rs-eye"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                        <i class="fi fi-rs-heart"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Compare">
-                                        <i class="fi fi-rs-shuffle"></i>
-                                    </a>
-                                </div>
-                                <div class="product__badge light-blue">Hot</div>
-                            </div>
-                            <div class="product__content">
-                                <span class="product__category">Clothing</span>
-                                <a href="{{ route('detail') }}">
-                                    <h3 class="product__title">Colorful Pattern Shirts</h3>
-                                </a>
-                                <div class="product__rating">
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                </div>
-                                <div class="product__price flex">
-                                    <span class="new__price">$238.85</span>
-                                    <span class="old__price">$245.8</span>
-                                </div>
-                                <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                    <i class="fi fi-rs-shopping-bag-add"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__banner">
-                                <a href="{{ route('detail') }}" class="product__images">
-                                    <img src="{{ asset('assets/img/product-10-1.jpg') }}" alt=""
-                                        class="product__img default" />
-                                    <img src="{{ asset('assets/img/product-10-2.jpg') }}" alt=""
-                                        class="product__img hover" />
-                                </a>
-                                <div class="product__actions">
-                                    <a href="#" class="action__btn" aria-label="Quick View">
-                                        <i class="fi fi-rs-eye"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                        <i class="fi fi-rs-heart"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Compare">
-                                        <i class="fi fi-rs-shuffle"></i>
-                                    </a>
-                                </div>
-                                <div class="product__badge light-blue">-30%</div>
-                            </div>
-                            <div class="product__content">
-                                <span class="product__category">Clothing</span>
-                                <a href="{{ route('detail') }}">
-                                    <h3 class="product__title">Colorful Pattern Shirts</h3>
-                                </a>
-                                <div class="product__rating">
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                </div>
-                                <div class="product__price flex">
-                                    <span class="new__price">$238.85</span>
-                                    <span class="old__price">$245.8</span>
-                                </div>
-                                <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                    <i class="fi fi-rs-shopping-bag-add"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__banner">
-                                <a href="{{ route('detail') }}" class="product__images">
-                                    <img src="{{ asset('assets/img/product-6-1.jpg') }}" alt=""
-                                        class="product__img default" />
-                                    <img src="{{ asset('assets/img/product-6-2.jpg') }}" alt=""
-                                        class="product__img hover" />
-                                </a>
-                                <div class="product__actions">
-                                    <a href="#" class="action__btn" aria-label="Quick View">
-                                        <i class="fi fi-rs-eye"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                        <i class="fi fi-rs-heart"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Compare">
-                                        <i class="fi fi-rs-shuffle"></i>
-                                    </a>
-                                </div>
-                                <div class="product__badge light-blue">-22%</div>
-                            </div>
-                            <div class="product__content">
-                                <span class="product__category">Clothing</span>
-                                <a href="{{ route('detail') }}">
-                                    <h3 class="product__title">Colorful Pattern Shirts</h3>
-                                </a>
-                                <div class="product__rating">
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                </div>
-                                <div class="product__price flex">
-                                    <span class="new__price">$238.85</span>
-                                    <span class="old__price">$245.8</span>
-                                </div>
-                                <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                    <i class="fi fi-rs-shopping-bag-add"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__banner">
-                                <a href="{{ route('detail') }}" class="product__images">
-                                    <img src="{{ asset('assets/img/product-9-1.jpg') }}" alt=""
-                                        class="product__img default" />
-                                    <img src="{{ asset('assets/img/product-9-2.jpg') }}" alt=""
-                                        class="product__img hover" />
-                                </a>
-                                <div class="product__actions">
-                                    <a href="#" class="action__btn" aria-label="Quick View">
-                                        <i class="fi fi-rs-eye"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                        <i class="fi fi-rs-heart"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Compare">
-                                        <i class="fi fi-rs-shuffle"></i>
-                                    </a>
-                                </div>
-                                <div class="product__badge light-green">-22%</div>
-                            </div>
-                            <div class="product__content">
-                                <span class="product__category">Clothing</span>
-                                <a href="{{ route('detail') }}">
-                                    <h3 class="product__title">Colorful Pattern Shirts</h3>
-                                </a>
-                                <div class="product__rating">
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                </div>
-                                <div class="product__price flex">
-                                    <span class="new__price">$238.85</span>
-                                    <span class="old__price">$245.8</span>
-                                </div>
-                                <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                    <i class="fi fi-rs-shopping-bag-add"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="product__banner">
-                                <a href="{{ route('detail') }}" class="product__images">
-                                    <img src="{{ asset('assets/img/product-8-1.jpg') }}" alt=""
-                                        class="product__img default" />
-                                    <img src="{{ asset('assets/img/product-8-2.jpg') }}" alt=""
-                                        class="product__img hover" />
-                                </a>
-                                <div class="product__actions">
-                                    <a href="#" class="action__btn" aria-label="Quick View">
-                                        <i class="fi fi-rs-eye"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                        <i class="fi fi-rs-heart"></i>
-                                    </a>
-                                    <a href="#" class="action__btn" aria-label="Compare">
-                                        <i class="fi fi-rs-shuffle"></i>
-                                    </a>
+                                    <div class="product__rating">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            <i class="fi fi-rs-star {{ $i <= $product->rating ? '' : 'inactive' }}"></i>
+                                        @endfor
+                                    </div>
+                                    <div class="product__price flex">
+                                        <span
+                                            class="new__price">${{ number_format($product->discount_price ?? $product->price, 2) }}</span>
+                                        @if ($product->discount_price)
+                                            <span class="old__price">${{ number_format($product->price, 2) }}</span>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
-                            <div class="product__content">
-                                <span class="product__category">Clothing</span>
-                                <a href="{{ route('detail') }}">
-                                    <h3 class="product__title">Colorful Pattern Shirts</h3>
-                                </a>
-                                <div class="product__rating">
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                    <i class="fi fi-rs-star"></i>
-                                </div>
-                                <div class="product__price flex">
-                                    <span class="new__price">$238.85</span>
-                                    <span class="old__price">$245.8</span>
-                                </div>
-                                <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                    <i class="fi fi-rs-shopping-bag-add"></i>
-                                </a>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
+
             </div>
         </section>
 
         <!--=============== DEALS ===============-->
         <section class="deals section">
             <div class="deals__container container grid">
-                <div class="deals__item">
-                    <div class="deals__group">
-                        <h3 class="deals__brand">Deals of the Day</h3>
-                        <span class="deals__category">Limited quantities</span>
-                    </div>
-                    <h4 class="deals__title">Summer Collection New Modern Design</h4>
-                    <div class="deals__price flex">
-                        <span class="new__price">$139.00</span>
-                        <span class="old__price">$160.99</span>
-                    </div>
-                    <div class="deals__group">
-                        <p class="deals__countdown-text">Hurry Up! Offer Ends In:</p>
-                        <div class="countdown">
-                            <div class="countdown__amount">
-                                <p class="countdown__period">02</p>
-                                <span class="unit">Days</span>
+                @foreach ($userdeals as $deal)
+                    <div class="swiper-slide">
+                        <div class="deals__item">
+                            <div class="deals__group">
+                                <h3 class="deals__brand">{{ $deal->deal_title }}</h3>
+                                <span class="deals__category">
+                                    {{ $deal->limited_quantities ? 'Limited quantities' : $deal->collection_type }}
+                                </span>
                             </div>
-                            <div class="countdown__amount">
-                                <p class="countdown__period">22</p>
-                                <span class="unit">Hours</span>
+                            <h4 class="deals__title">{{ $deal->offer_message }}</h4>
+                            <div class="deals__price flex">
+                                <span class="new__price">${{ number_format($deal->price, 2) }}</span>
+                                <span class="old__price">${{ number_format($deal->original_price, 2) }}</span>
                             </div>
-                            <div class="countdown__amount">
-                                <p class="countdown__period">57</p>
-                                <span class="unit">Mins</span>
+                            <div class="deals__group">
+                                <p class="deals__countdown-text">Hurry Up! Offer Ends In:</p>
+                                <div class="countdown" data-end-date="{{ $deal->end_date }}">
+                                    <div class="countdown__amount">
+                                        <p class="countdown__period">00</p><span class="unit">Days</span>
+                                    </div>
+                                    <div class="countdown__amount">
+                                        <p class="countdown__period">00</p><span class="unit">Hours</span>
+                                    </div>
+                                    <div class="countdown__amount">
+                                        <p class="countdown__period">00</p><span class="unit">Mins</span>
+                                    </div>
+                                    <div class="countdown__amount">
+                                        <p class="countdown__period">00</p><span class="unit">Sec</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="countdown__amount">
-                                <p class="countdown__period">28</p>
-                                <span class="unit">Sec</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="deals__btn">
-                        <a href="{{ route('detail') }}" class="btn btn--md">Shop Now</a>
-                    </div>
-                </div>
-                <div class="deals__item">
-                    <div class="deals__group">
-                        <h3 class="deals__brand">Women Clothing</h3>
-                        <span class="deals__category">Shirts & Bag</span>
-                    </div>
-                    <h4 class="deals__title">Try Something new on vacation</h4>
-                    <div class="deals__price flex">
-                        <span class="new__price">$178.00</span>
-                        <span class="old__price">$256.99</span>
-                    </div>
-                    <div class="deals__group">
-                        <p class="deals__countdown-text">Hurry Up! Offer Ends In:</p>
-                        <div class="countdown">
-                            <div class="countdown__amount">
-                                <p class="countdown__period">02</p>
-                                <span class="unit">Days</span>
-                            </div>
-                            <div class="countdown__amount">
-                                <p class="countdown__period">22</p>
-                                <span class="unit">Hours</span>
-                            </div>
-                            <div class="countdown__amount">
-                                <p class="countdown__period">57</p>
-                                <span class="unit">Mins</span>
-                            </div>
-                            <div class="countdown__amount">
-                                <p class="countdown__period">28</p>
-                                <span class="unit">Sec</span>
+                            <div class="deals__btn">
+                                <a href="{{ route('detail') }}" class="btn btn--md">Shop Now</a>
                             </div>
                         </div>
                     </div>
-                    <div class="deals__btn">
-                        <a href="{{ route('detail') }}" class="btn btn--md">Shop Now</a>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </section>
+
 
         <!--=============== NEW ARRIVALS ===============-->
         <section class="new__arrivals container section">
             <h3 class="section__title"><span>New</span> Arrivals</h3>
             <div class="new__container swiper">
                 <div class="swiper-wrapper">
-                    <div class="product__item swiper-slide">
-                        <div class="product__banner">
-                            <a href="{{ route('detail') }}" class="product__images">
-                                <img src="{{ asset('assets/img/product-1-1.jpg') }}" alt=""
-                                    class="product__img default" />
-                                <img src="{{ asset('assets/img/product-1-2.jpg') }}" alt=""
-                                    class="product__img hover" />
-                            </a>
-                            <div class="product__actions">
-                                <a href="#" class="action__btn" aria-label="Quick View">
-                                    <i class="fi fi-rs-eye"></i>
+                    @foreach ($newArrivals as $product)
+                        <div class="product__item swiper-slide">
+                            <div class="product__banner">
+                                <a href="{{ route('product-details', $product->slug) }}" class="product__images">
+                                    <img src="{{ asset('storage/' . $product->image_front) }}"
+                                        alt="{{ $product->name }}" class="product__img default" />
+                                    <img src="{{ asset('storage/' . $product->image_back) }}" alt="{{ $product->name }}"
+                                        class="product__img hover" />
                                 </a>
-                                <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                    <i class="fi fi-rs-heart"></i>
-                                </a>
-                                <a href="#" class="action__btn" aria-label="Compare">
-                                    <i class="fi fi-rs-shuffle"></i>
-                                </a>
+                                <div class="product__actions">
+                                    <a href="{{ route('product-details', $product->slug) }}" class="action__btn"
+                                        aria-label="Quick View">
+                                        <i class="fi fi-rs-eye"></i>
+                                    </a>
+                                    <form action="{{ route('wishlist.add') }}" method="POST"
+                                        class="wishlistForm d-inline">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        <button type="submit" class="action__btn" id="wishlistBtn"
+                                            aria-label="Wishlist">
+                                            <i class="fi fi-rs-heart"></i>
+                                        </button>
+                                    </form>
+
+                                    <form action="{{ route('addToCompare', $product->id) }}" method="POST"
+                                        style="display:inline;">
+                                        @csrf
+                                        <button type="submit" class="action__btn" aria-label="Compare">
+                                            <i class="fi fi-rs-shuffle"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                                {!! $product->discount_badge !!}
                             </div>
-                            <div class="product__badge light-pink">Hot</div>
+                            <div class="product__content">
+                                <span class="product__category">{{ $product->category->name }}</span>
+                                <a href="{{ route('product-details', $product->slug) }}">
+                                    <h3 class="product__title">{{ $product->name }}</h3>
+                                </a>
+                                <div class="product__rating">
+                                    <i class="fi fi-rs-star"></i>
+                                    <i class="fi fi-rs-star"></i>
+                                    <i class="fi fi-rs-star"></i>
+                                    <i class="fi fi-rs-star"></i>
+                                    <i class="fi fi-rs-star"></i>
+                                </div>
+                                <div class="product__price flex">
+                                    @if ($product->discount_price)
+                                        <span class="new__price">${{ $product->discount_price }}</span>
+                                        <span class="old__price">${{ $product->price }}</span>
+                                    @else
+                                        <span class="new__price">${{ $product->price }}</span>
+                                    @endif
+                                </div>
+                                {{-- <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
+                                    <i class="fi fi-rs-shopping-bag-add"></i>
+                                </a> --}}
+                            </div>
                         </div>
-                        <div class="product__content">
-                            <span class="product__category">Clothing</span>
-                            <a href="{{ route('detail') }}">
-                                <h3 class="product__title">Colorful Pattern Shirts</h3>
-                            </a>
-                            <div class="product__rating">
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                            </div>
-                            <div class="product__price flex">
-                                <span class="new__price">$238.85</span>
-                                <span class="old__price">$245.8</span>
-                            </div>
-                            <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                <i class="fi fi-rs-shopping-bag-add"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product__item swiper-slide">
-                        <div class="product__banner">
-                            <a href="{{ route('detail') }}" class="product__images">
-                                <img src="{{ asset('assets/img/product-2-1.jpg') }}" alt=""
-                                    class="product__img default" />
-                                <img src="{{ asset('assets/img/product-2-2.jpg') }}" alt=""
-                                    class="product__img hover" />
-                            </a>
-                            <div class="product__actions">
-                                <a href="#" class="action__btn" aria-label="Quick View">
-                                    <i class="fi fi-rs-eye"></i>
-                                </a>
-                                <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                    <i class="fi fi-rs-heart"></i>
-                                </a>
-                                <a href="#" class="action__btn" aria-label="Compare">
-                                    <i class="fi fi-rs-shuffle"></i>
-                                </a>
-                            </div>
-                            <div class="product__badge light-green">Hot</div>
-                        </div>
-                        <div class="product__content">
-                            <span class="product__category">Clothing</span>
-                            <a href="{{ route('detail') }}">
-                                <h3 class="product__title">Colorful Pattern Shirts</h3>
-                            </a>
-                            <div class="product__rating">
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                            </div>
-                            <div class="product__price flex">
-                                <span class="new__price">$238.85</span>
-                                <span class="old__price">$245.8</span>
-                            </div>
-                            <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                <i class="fi fi-rs-shopping-bag-add"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product__item swiper-slide">
-                        <div class="product__banner">
-                            <a href="{{ route('detail') }}" class="product__images">
-                                <img src="{{ asset('assets/img/product-3-1.jpg') }}" alt=""
-                                    class="product__img default" />
-                                <img src="{{ asset('assets/img/product-3-2.jpg') }}" alt=""
-                                    class="product__img hover" />
-                            </a>
-                            <div class="product__actions">
-                                <a href="#" class="action__btn" aria-label="Quick View">
-                                    <i class="fi fi-rs-eye"></i>
-                                </a>
-                                <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                    <i class="fi fi-rs-heart"></i>
-                                </a>
-                                <a href="#" class="action__btn" aria-label="Compare">
-                                    <i class="fi fi-rs-shuffle"></i>
-                                </a>
-                            </div>
-                            <div class="product__badge light-orange">Hot</div>
-                        </div>
-                        <div class="product__content">
-                            <span class="product__category">Clothing</span>
-                            <a href="{{ route('detail') }}">
-                                <h3 class="product__title">Colorful Pattern Shirts</h3>
-                            </a>
-                            <div class="product__rating">
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                            </div>
-                            <div class="product__price flex">
-                                <span class="new__price">$238.85</span>
-                                <span class="old__price">$245.8</span>
-                            </div>
-                            <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                <i class="fi fi-rs-shopping-bag-add"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product__item swiper-slide">
-                        <div class="product__banner">
-                            <a href="{{ route('detail') }}" class="product__images">
-                                <img src="{{ asset('assets/img/product-4-1.jpg') }}" alt=""
-                                    class="product__img default" />
-                                <img src="{{ asset('assets/img/product-4-2.jpg') }}" alt=""
-                                    class="product__img hover" />
-                            </a>
-                            <div class="product__actions">
-                                <a href="#" class="action__btn" aria-label="Quick View">
-                                    <i class="fi fi-rs-eye"></i>
-                                </a>
-                                <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                    <i class="fi fi-rs-heart"></i>
-                                </a>
-                                <a href="#" class="action__btn" aria-label="Compare">
-                                    <i class="fi fi-rs-shuffle"></i>
-                                </a>
-                            </div>
-                            <div class="product__badge light-blue">Hot</div>
-                        </div>
-                        <div class="product__content">
-                            <span class="product__category">Clothing</span>
-                            <a href="{{ route('detail') }}">
-                                <h3 class="product__title">Colorful Pattern Shirts</h3>
-                            </a>
-                            <div class="product__rating">
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                            </div>
-                            <div class="product__price flex">
-                                <span class="new__price">$238.85</span>
-                                <span class="old__price">$245.8</span>
-                            </div>
-                            <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                <i class="fi fi-rs-shopping-bag-add"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product__item swiper-slide">
-                        <div class="product__banner">
-                            <a href="{{ route('detail') }}" class="product__images">
-                                <img src="{{ asset('assets/img/product-5-1.jpg') }}" alt=""
-                                    class="product__img default" />
-                                <img src="{{ asset('assets/img/product-5-2.jpg') }}" alt=""
-                                    class="product__img hover" />
-                            </a>
-                            <div class="product__actions">
-                                <a href="#" class="action__btn" aria-label="Quick View">
-                                    <i class="fi fi-rs-eye"></i>
-                                </a>
-                                <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                    <i class="fi fi-rs-heart"></i>
-                                </a>
-                                <a href="#" class="action__btn" aria-label="Compare">
-                                    <i class="fi fi-rs-shuffle"></i>
-                                </a>
-                            </div>
-                            <div class="product__badge light-blue">-30%</div>
-                        </div>
-                        <div class="product__content">
-                            <span class="product__category">Clothing</span>
-                            <a href="{{ route('detail') }}">
-                                <h3 class="product__title">Colorful Pattern Shirts</h3>
-                            </a>
-                            <div class="product__rating">
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                            </div>
-                            <div class="product__price flex">
-                                <span class="new__price">$238.85</span>
-                                <span class="old__price">$245.8</span>
-                            </div>
-                            <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                <i class="fi fi-rs-shopping-bag-add"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product__item swiper-slide">
-                        <div class="product__banner">
-                            <a href="{{ route('detail') }}" class="product__images">
-                                <img src="{{ asset('assets/img/product-6-1.jpg') }}" alt=""
-                                    class="product__img default" />
-                                <img src="{{ asset('assets/img/product-6-2.jpg   ') }}" alt=""
-                                    class="product__img hover" />
-                            </a>
-                            <div class="product__actions">
-                                <a href="#" class="action__btn" aria-label="Quick View">
-                                    <i class="fi fi-rs-eye"></i>
-                                </a>
-                                <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                    <i class="fi fi-rs-heart"></i>
-                                </a>
-                                <a href="#" class="action__btn" aria-label="Compare">
-                                    <i class="fi fi-rs-shuffle"></i>
-                                </a>
-                            </div>
-                            <div class="product__badge light-blue">-22%</div>
-                        </div>
-                        <div class="product__content">
-                            <span class="product__category">Clothing</span>
-                            <a href="{{ route('detail') }}">
-                                <h3 class="product__title">Colorful Pattern Shirts</h3>
-                            </a>
-                            <div class="product__rating">
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                            </div>
-                            <div class="product__price flex">
-                                <span class="new__price">$238.85</span>
-                                <span class="old__price">$245.8</span>
-                            </div>
-                            <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                <i class="fi fi-rs-shopping-bag-add"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product__item swiper-slide">
-                        <div class="product__banner">
-                            <a href="{{ route('detail') }}" class="product__images">
-                                <img src="{{ asset('assets/img/product-7-1.jpg') }}" alt=""
-                                    class="product__img default" />
-                                <img src="{{ asset('assets/img/product-7-2.jpg') }} " alt=""
-                                    class="product__img hover" />
-                            </a>
-                            <div class="product__actions">
-                                <a href="#" class="action__btn" aria-label="Quick View">
-                                    <i class="fi fi-rs-eye"></i>
-                                </a>
-                                <a href="#" class="action__btn" aria-label="Add to Wishlist">
-                                    <i class="fi fi-rs-heart"></i>
-                                </a>
-                                <a href="#" class="action__btn" aria-label="Compare">
-                                    <i class="fi fi-rs-shuffle"></i>
-                                </a>
-                            </div>
-                            <div class="product__badge light-green">-22%</div>
-                        </div>
-                        <div class="product__content">
-                            <span class="product__category">Clothing</span>
-                            <a href="{{ route('detail') }}">
-                                <h3 class="product__title">Colorful Pattern Shirts</h3>
-                            </a>
-                            <div class="product__rating">
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-rs-star"></i>
-                            </div>
-                            <div class="product__price flex">
-                                <span class="new__price">$238.85</span>
-                                <span class="old__price">$245.8</span>
-                            </div>
-                            <a href="#" class="action__btn cart__btn" aria-label="Add To Cart">
-                                <i class="fi fi-rs-shopping-bag-add"></i>
-                            </a>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
                 <div class="swiper-button-prev">
@@ -1492,210 +360,252 @@
         <!--=============== SHOWCASE ===============-->
         <section class="showcase section">
             <div class="showcase__container container grid">
+                {{-- Hot Releases --}}
                 <div class="showcase__wrapper">
                     <h3 class="section__title">Hot Releases</h3>
-                    <div class="showcase__item">
-                        <a href="{{ route('detail') }}" class="showcase__img-box">
-                            <img src="{{ asset('assets/img/showcase-img-1.jpg') }}" alt=""
-                                class="showcase__img" />
-                        </a>
-                        <div class="showcase__content">
-                            <a href="{{ route('detail') }}">
-                                <h4 class="showcase__title">
-                                    Floral Print Casual Cotton Dress
-                                </h4>
+                    @foreach ($hotReleases as $product)
+                        <div class="showcase__item">
+                            <a href="{{ route('product-details', $product->slug) }}" class="showcase__img-box">
+                                <img src="{{ asset('storage/' . $product->image_front) }}" alt="{{ $product->name }}"
+                                    class="showcase__img" />
                             </a>
-                            <div class="showcase__price flex">
-                                <span class="new__price">$238.85</span>
-                                <span class="old__price">$245.8</span>
+                            <div class="showcase__content">
+                                <a href="{{ route('product-details', $product->slug) }}">
+                                    <h4 class="showcase__title">{{ $product->name }}</h4>
+                                </a>
+                                <div class="showcase__price flex">
+                                    <span class="new__price">${{ $product->discount_price }}</span>
+                                    <span class="old__price">${{ $product->price }}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="showcase__item">
-                        <a href="{{ route('detail') }}" class="showcase__img-box">
-                            <img src="{{ asset('assets/img/showcase-img-2.jpg') }}" alt=""
-                                class="showcase__img" />
-                        </a>
-                        <div class="showcase__content">
-                            <a href="{{ route('detail') }}">
-                                <h4 class="showcase__title">
-                                    Ruffled Solid Long Sleeve Blouse
-                                </h4>
-                            </a>
-                            <div class="showcase__price flex">
-                                <span class="new__price">$238.85</span>
-                                <span class="old__price">$245.8</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="showcase__item">
-                        <a href="{{ route('detail') }}" class="showcase__img-box">
-                            <img src="{{ asset('assets/img/showcase-img-3.jpg') }}" alt=""
-                                class="showcase__img" />
-                        </a>
-                        <div class="showcase__content">
-                            <a href="{{ route('detail') }}">
-                                <h4 class="showcase__title">
-                                    Multi-Color Print V-neck T-shirt
-                                </h4>
-                            </a>
-                            <div class="showcase__price flex">
-                                <span class="new__price">$238.85</span>
-                                <span class="old__price">$245.8</span>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
+
+                {{-- Deals & Outlet --}}
                 <div class="showcase__wrapper">
                     <h3 class="section__title">Deals & Outlet</h3>
-                    <div class="showcase__item">
-                        <a href="{{ route('detail') }}" class="showcase__img-box">
-                            <img src="{{ asset('assets/img/showcase-img-4.jpg') }}" alt=""
-                                class="showcase__img" />
-                        </a>
-                        <div class="showcase__content">
-                            <a href="{{ route('detail') }}">
-                                <h4 class="showcase__title">Fish Print Patched T-shirt</h4>
+                    @foreach ($deals as $product)
+                        <div class="showcase__item">
+                            <a href="{{ route('product-details', $product->slug) }}" class="showcase__img-box">
+                                <img src="{{ asset('storage/' . $product->image_front) }}" alt="{{ $product->name }}"
+                                    class="showcase__img" />
                             </a>
-                            <div class="showcase__price flex">
-                                <span class="new__price">$238.85</span>
-                                <span class="old__price">$245.8</span>
+                            <div class="showcase__content">
+                                <a href="{{ route('product-details', $product->slug) }}">
+                                    <h4 class="showcase__title">{{ $product->name }}</h4>
+                                </a>
+                                <div class="showcase__price flex">
+                                    <span class="new__price">${{ $product->discount_price }}</span>
+                                    <span class="old__price">${{ $product->price }}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="showcase__item">
-                        <a href="{{ route('detail') }}" class="showcase__img-box">
-                            <img src="{{ asset('assets/img/showcase-img-5.jpg') }}" alt=""
-                                class="showcase__img" />
-                        </a>
-                        <div class="showcase__content">
-                            <a href="{{ route('detail') }}">
-                                <h4 class="showcase__title">Fintage Floral Print Dress</h4>
-                            </a>
-                            <div class="showcase__price flex">
-                                <span class="new__price">$238.85</span>
-                                <span class="old__price">$245.8</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="showcase__item">
-                        <a href="{{ route('detail') }}" class="showcase__img-box">
-                            <img src="{{ asset('assets/img/showcase-img-6.jpg') }}" alt=""
-                                class="showcase__img" />
-                        </a>
-                        <div class="showcase__content">
-                            <a href="{{ route('detail') }}">
-                                <h4 class="showcase__title">
-                                    Multi-Color Stripe Circle T-shirt
-                                </h4>
-                            </a>
-                            <div class="showcase__price flex">
-                                <span class="new__price">$238.85</span>
-                                <span class="old__price">$245.8</span>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
+
+                {{-- Top Selling --}}
                 <div class="showcase__wrapper">
                     <h3 class="section__title">Top Selling</h3>
-                    <div class="showcase__item">
-                        <a href="{{ route('detail') }}" class="showcase__img-box">
-                            <img src="{{ asset('assets/img/showcase-img-7.jpg') }}" alt=""
-                                class="showcase__img" />
-                        </a>
-                        <div class="showcase__content">
-                            <a href="{{ route('detail') }}">
-                                <h4 class="showcase__title">
-                                    Geometric Printed Long Sleeve Blouse
-                                </h4>
+                    @foreach ($topSelling as $product)
+                        <div class="showcase__item">
+                            <a href="{{ route('product-details', $product->slug) }}" class="showcase__img-box">
+                                <img src="{{ asset('storage/' . $product->image_front) }}" alt="{{ $product->name }}"
+                                    class="showcase__img" />
                             </a>
-                            <div class="showcase__price flex">
-                                <span class="new__price">$238.85</span>
-                                <span class="old__price">$245.8</span>
+                            <div class="showcase__content">
+                                <a href="{{ route('product-details', $product->slug) }}">
+                                    <h4 class="showcase__title">{{ $product->name }}</h4>
+                                </a>
+                                <div class="showcase__price flex">
+                                    @if ($product->discount_price)
+                                        <span class="new__price">${{ $product->discount_price }}</span>
+                                        <span class="old__price">${{ $product->price }}</span>
+                                    @else
+                                        <span class="new__price">${{ $product->price }}</span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="showcase__item">
-                        <a href="{{ route('detail') }}" class="showcase__img-box">
-                            <img src="{{ asset('assets/img/showcase-img-8.jpg') }}" alt=""
-                                class="showcase__img" />
-                        </a>
-                        <div class="showcase__content">
-                            <a href="{{ route('detail') }}">
-                                <h4 class="showcase__title">Print Patchwork Maxi Dress</h4>
-                            </a>
-                            <div class="showcase__price flex">
-                                <span class="new__price">$238.85</span>
-                                <span class="old__price">$245.8</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="showcase__item">
-                        <a href="{{ route('detail') }}" class="showcase__img-box">
-                            <img src="{{ asset('assets/img/showcase-img-9.jpg') }}" alt=""
-                                class="showcase__img" />
-                        </a>
-                        <div class="showcase__content">
-                            <a href="{{ route('detail') }}">
-                                <h4 class="showcase__title">
-                                    Daisy Floral Print Straps Jumpsuit
-                                </h4>
-                            </a>
-                            <div class="showcase__price flex">
-                                <span class="new__price">$238.85</span>
-                                <span class="old__price">$245.8</span>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
+
+                {{-- Trendy --}}
                 <div class="showcase__wrapper">
                     <h3 class="section__title">Trendy</h3>
-                    <div class="showcase__item">
-                        <a href="{{ route('detail') }}" class="showcase__img-box">
-                            <img src="{{ asset('assets/img/showcase-img-7.jpg') }}" alt=""
-                                class="showcase__img" />
-                        </a>
-                        <div class="showcase__content">
-                            <a href="{{ route('detail') }}">
-                                <h4 class="showcase__title">Floral Print Casual Cotton</h4>
+                    @foreach ($trendy as $product)
+                        <div class="showcase__item">
+                            <a href="{{ route('product-details', $product->slug) }}" class="showcase__img-box">
+                                <img src="{{ asset('storage/' . $product->image_front) }}" alt="{{ $product->name }}"
+                                    class="showcase__img" />
                             </a>
-                            <div class="showcase__price flex">
-                                <span class="new__price">$238.85</span>
-                                <span class="old__price">$245.8</span>
+                            <div class="showcase__content">
+                                <a href="{{ route('product-details', $product->slug) }}">
+                                    <h4 class="showcase__title">{{ $product->name }}</h4>
+                                </a>
+                                <div class="showcase__price flex">
+                                    @if ($product->discount_price)
+                                        <span class="new__price">${{ $product->discount_price }}</span>
+                                        <span class="old__price">${{ $product->price }}</span>
+                                    @else
+                                        <span class="new__price">${{ $product->price }}</span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="showcase__item">
-                        <a href="{{ route('detail') }}" class="showcase__img-box">
-                            <img src="{{ asset('assets/img/showcase-img-8.jpg') }}" alt=""
-                                class="showcase__img" />
-                        </a>
-                        <div class="showcase__content">
-                            <a href="{{ route('detail') }}">
-                                <h4 class="showcase__title">Ruffled Solid Long Sleeve</h4>
-                            </a>
-                            <div class="showcase__price flex">
-                                <span class="new__price">$238.85</span>
-                                <span class="old__price">$245.8</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="showcase__item">
-                        <a href="{{ route('detail') }}" class="showcase__img-box">
-                            <img src="{{ asset('assets/img/showcase-img-9.jpg') }}" alt=""
-                                class="showcase__img" />
-                        </a>
-                        <div class="showcase__content">
-                            <a href="{{ route('detail') }}">
-                                <h4 class="showcase__title">Multi-Color Print V-neck</h4>
-                            </a>
-                            <div class="showcase__price flex">
-                                <span class="new__price">$238.85</span>
-                                <span class="old__price">$245.8</span>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </section>
     @endsection
+
+    @push('scripts')
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const countdownElements = document.querySelectorAll('.countdown');
+
+                countdownElements.forEach(function(countdown) {
+                    const endDate = new Date(countdown.getAttribute('data-end-date')).getTime();
+
+                    function updateCountdown() {
+                        const now = new Date().getTime();
+                        const distance = endDate - now;
+
+                        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                        const periods = countdown.querySelectorAll('.countdown__period');
+                        if (periods.length >= 4) {
+                            periods[0].textContent = String(days).padStart(2, '0');
+                            periods[1].textContent = String(hours).padStart(2, '0');
+                            periods[2].textContent = String(minutes).padStart(2, '0');
+                            periods[3].textContent = String(seconds).padStart(2, '0');
+                        }
+
+                        // Stop the timer when the countdown ends
+                        if (distance < 0) {
+                            clearInterval(timer);
+                            periods.forEach(el => el.textContent = '00');
+                        }
+                    }
+
+                    updateCountdown(); // Initial call
+                    const timer = setInterval(updateCountdown, 1000);
+                });
+            });
+        </script>
+
+        @if (session('success'))
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Added to Compare',
+                    text: '{{ session('success') }}',
+                    toast: true,
+                    position: 'top-end',
+                    background: '#1e1e2f',
+                    color: '#ffffff',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true
+                    didClose: () => {
+                        window.location.reload();
+                    }
+                });
+            </script>
+        @endif
+
+        @if (session('info'))
+            <script>
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Already Added',
+                    text: '{{ session('info') }}',
+                    toast: true,
+                    position: 'top-end',
+                    background: '#1e1e2f',
+                    color: '#ffffff',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true
+                    didClose: () => {
+                        window.location.reload();
+                    }
+                });
+            </script>
+        @endif
+
+        <script>
+            // Function to update wishlist count dynamically
+            function updateWishlistCount() {
+                $.ajax({
+                    url: "{{ route('wishlist.count') }}",
+                    type: "GET",
+                    success: function(response) {
+                        $('#wishlistCount').text(response.wishlistCount);
+                    },
+                    error: function() {
+                        console.log("Error updating wishlist count.");
+                    }
+                });
+            }
+            // Handle wishlist button click
+            $(document).on('submit', '.wishlistForm', function(e) {
+                e.preventDefault(); // Prevent form submission
+
+                // Check if the user is logged in
+                @if (auth()->check())
+                    // If logged in, submit the form to add to the wishlist
+                    var form = $(this);
+                    var formData = form.serialize();
+
+                    $.ajax({
+                        url: form.attr('action'),
+                        type: "POST",
+                        data: formData,
+                        dataType: "json",
+                        success: function(response) {
+                            updateWishlistCount();
+                            $.toast({
+                                heading: 'Success',
+                                text: response.message,
+                                icon: 'success',
+                                position: 'bottom-right'
+                            });
+                        },
+                        error: function(xhr) {
+                            var errorMessage = "Something went wrong.";
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                errorMessage = xhr.responseJSON.message;
+                            }
+
+                            $.toast({
+                                heading: 'Error',
+                                text: errorMessage,
+                                icon: 'error',
+                                position: 'bottom-right'
+                            });
+                        }
+                    });
+                @else
+                    // If not logged in, show SweetAlert to prompt for login
+                    Swal.fire({
+                        title: 'Login Required',
+                        text: "Please login to add products to your wishlist!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Login Now'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "{{ route('login-signup') }}"; // Redirect to login page
+                        }
+                    });
+                @endif
+            });
+        </script>
+    @endpush

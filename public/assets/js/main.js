@@ -91,6 +91,40 @@ let swiperProducts = new Swiper(".new__container", {
   },
 });
 
+/*=============== SWIPER CATEGORIES Filter ===============*/
+let swiperCategoriesFilter = new Swiper(".categories__container__filter", {
+  spaceBetween: 10,
+  loop: true,
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+
+  breakpoints: {
+    350: {
+      slidesPerView: 2,
+      spaceBetween: 10,
+    },
+    768: {
+      slidesPerView: 4,
+      spaceBetween: 10,
+    },
+    992: {
+      slidesPerView: 5,
+      spaceBetween: 10,
+    },
+    1200: {
+      slidesPerView: 7,
+      spaceBetween: 10,
+    },
+    1400: {
+      slidesPerView: 8,
+      spaceBetween: 10,
+    },
+  },
+});
+
+
 /*=============== PRODUCTS TABS ===============*/
 const tabs = document.querySelectorAll("[data-target]"),
   tabsContents = document.querySelectorAll("[content]");

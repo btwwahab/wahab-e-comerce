@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
-            $table->decimal('price' ,10 , 2);
-            $table->decimal('discount_price' , 10 , 2)->nullable();
+            $table->decimal('price', 10, 2);
+            $table->decimal('discount_price', 10, 2)->nullable();
             $table->text('description')->nullable();
             $table->string('image_front')->nullable();
             $table->string('image_back')->nullable();
@@ -26,6 +26,10 @@ return new class extends Migration
             $table->string('tags')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();
+
+            // Add index for common queries
+            $table->index(['status', 'category_id']);
+            $table->index('price');
         });
     }
 

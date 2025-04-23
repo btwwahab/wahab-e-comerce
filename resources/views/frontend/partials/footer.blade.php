@@ -28,7 +28,7 @@
   <div class="footer__container grid">
     <div class="footer__content">
       <a href="index.html" class="footer__logo">
-        <img src="assets/img/logo.svg" alt="" class="footer__logo-img" />
+        <img class="nav__logo-img" src="{{ asset('assets/img/logo-2.png') }}" alt="website logo" />
       </a>
       <h4 class="footer__subtitle">Contact</h4>
       <p class="footer__description">
