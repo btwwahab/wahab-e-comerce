@@ -28,7 +28,7 @@
   <div class="footer__container grid">
     <div class="footer__content">
       <a href="index.html" class="footer__logo">
-        <img src="assets/img/logo.svg" alt="" class="footer__logo-img" />
+        <img class="nav__logo-img" src="{{ asset('assets/img/logo-2.png') }}" alt="website logo" />
       </a>
       <h4 class="footer__subtitle">Contact</h4>
       <p class="footer__description">
@@ -113,8 +113,8 @@
     </div>
   </div>
   <div class="footer__bottom">
-    <p class="copyright">&copy; 2024 Evara. All right reserved</p>
-    <span class="designer">Designer by Crypticalcoder</span>
+    <p class="copyright">&copy; 2025 Wahab E-Commerce. All right reserved</p>
+    <span class="designer">Designed by Abdul-Wahab</span>
   </div>
 </footer>
 
